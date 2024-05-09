@@ -1,19 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import r2wc from '@r2wc/react-to-web-component';
+import Greeting from './components/Greeting'; // Adjust the path to your actual React component
+import HelloWorld from './components/HelloWorld';
+import MainAiChatBox from './components/MainAiChatBox';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const WebGreeting = r2wc(Greeting, {
+  props: { name: 'string' }, // Specify the expected prop types
+});
+const WebHelloWorld = r2wc(HelloWorld, {
+  props: { name: 'string' }, // Specify the expected prop types
+});
+const WebMainChatBox = r2wc(MainAiChatBox, {
+  props: { type: 'string' }, // Specify the expected prop types
+});
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+customElements.define('web-greeting', WebGreeting);
+customElements.define('web-hello-world', WebHelloWorld);
+customElements.define('web-main-chatbox', WebMainChatBox);
